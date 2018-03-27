@@ -55,6 +55,7 @@ require("./services/passport");
 
 const app=express();
 
+//Intermediarios entre peticiones
 app.use(cookieSession({
   maxAge: Util.daysToMiliseconds(10),
   keys: [keys.cookieKey]
