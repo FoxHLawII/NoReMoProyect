@@ -41,12 +41,18 @@ app.get(
 app.get("/auth/google/callback", passport.authenticate("google"));
 app.listen(PORT);
 */
-const express=require("express");
-const passportConfig=require("./services/passport");
-const authRoutes=require("./routes/auth");
 const PORT=process.env.PORT || 3000;
+const express=require("express");
+const mongoose=require("mongoose");
+const authRoutes=require("./routes/auth");
+const keys=require("./config/keys");
+
+require("./models/user");
+require("./services/passport");
 
 const app=express();
 
+mongoose.connect(keys.mongoUri);
 authRoutes(app);
+
 app.listen(PORT)
