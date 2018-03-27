@@ -4,6 +4,16 @@ const mongoose = require("mongoose");
 const User = mongoose.model("users");
 const keys = require("../config/keys");
 
+passport.serializeUser((user, done) => {
+  done(null, user.id);
+});
+
+passport.deserializeUser((usarId, done) => {
+  User.findById(userId).then(user => {
+    done(null, user);
+  });
+});
+
 passport.use(
   new GoogleStrategy(
     {
@@ -21,7 +31,7 @@ passport.use(
           });
           console.log("Usuario creado!");
         } else {
-          done(null,user);
+          done(null, user);
           console.log("Usuario ya existe");
         }
       });
