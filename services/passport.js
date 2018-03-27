@@ -22,20 +22,18 @@ passport.use(
       clientSecret: keys.googleClientSecret,
       callbackURL: "/auth/google/callback"
     },
-    (accessToken, refreshToken, profile, done) => {
+    async (accessToken, refreshToken, profile, done) => {
       //findOne trae la entidad y si no encuentra devuelve null
       //callback done(errorMessage, object)
-      User.findOne({ googleId: profile.id }).then(user => {
-        if (!user) {
-          new User({ googleId: profile.id }).save().then(savedUser => {
-            done(null, savedUser);
-          });
-          console.log("Usuario creado!");
-        } else {
-          done(null, user);
-          console.log("Usuario ya existe");
-        }
-      });
+      const user = await User.findOne({ googleId: profile.id });
+      if (!user) {
+        const savedUser = await new User({ googleId: profile.id }).save();
+        done(null, savedUser);
+        console.log("Usuario creado!");
+      } else {
+        done(null, user);
+        console.log("Usuario ya existe");
+      }
     }
   )
 );
