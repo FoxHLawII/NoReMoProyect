@@ -44,13 +44,23 @@ app.listen(PORT);
 const PORT=process.env.PORT || 3000;
 const express=require("express");
 const mongoose=require("mongoose");
+const cookieSession=require("cookie-session");
+const passport=require("passport");
 const authRoutes=require("./routes/auth");
 const keys=require("./config/keys");
+const Util=require("./utils/parsers");
 
 require("./models/user");
 require("./services/passport");
 
 const app=express();
+
+app.use(cookieSession({
+  maxAge: Util.daysToMiliseconds(10),
+  keys: [keys.cookieKey]
+}));
+app.use(passport.initialize());
+app.use(passport.session());
 
 mongoose.connect(keys.mongoUri);
 authRoutes(app);

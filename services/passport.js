@@ -4,16 +4,17 @@ const mongoose = require("mongoose");
 const User = mongoose.model("users");
 const keys = require("../config/keys");
 
+//Cada petición realizará estos metodos respectivamente
 passport.serializeUser((user, done) => {
   done(null, user.id);
 });
-
-passport.deserializeUser((usarId, done) => {
+passport.deserializeUser((userId, done) => {
   User.findById(userId).then(user => {
     done(null, user);
   });
 });
 
+//Estrategía para autenticación con google
 passport.use(
   new GoogleStrategy(
     {
