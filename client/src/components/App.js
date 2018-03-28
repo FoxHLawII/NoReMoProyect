@@ -1,7 +1,8 @@
 import React from "react";
 import { BrowserRouter, Route } from "react-router-dom";
 
-const Header = () => <h2>HEADER</h2>;
+import Header from "./Header";
+
 const Dashboard = () => <h2>Dashboar</h2>;
 const SurveyNew = () => <h2>SurveyNew</h2>;
 const Landing = () => <h2>Landing</h2>;
@@ -10,10 +11,13 @@ const Landing = () => <h2>Landing</h2>;
 //y éste a su vez tendrá las rutas y los componentes que mostrará
 const App = () => {
   return (
-    <div>
+    <div class="container">
       <BrowserRouter>
         <div>
-          <Route path="/" component={Landing} />
+          <Header />
+          <Route exact path="/" component={Landing} />
+          <Route exact path="/surveys" component={Dashboard}/>
+          <Route path="/surveys/new" component={SurveyNew}/>
         </div>
       </BrowserRouter>
     </div>

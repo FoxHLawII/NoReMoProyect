@@ -1,3 +1,5 @@
+import "materialize-css/dist/css/materialize.min.css";
+
 import React from "react";
 import ReactDom from "react-dom";
 //El provider component informa a el hijo cuando hay cambios en su prop store
