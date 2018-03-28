@@ -19,5 +19,5 @@ import { FETCH_USER } from "./types";
 export const fetchUser = () =>
   async function(dispatcher) {
     let response = await axios.get("/api/current_user");
-    dispatcher({ type: FETCH_USER, payload: response });
+    dispatcher({ type: FETCH_USER, payload: response.data });
   };
