@@ -6,6 +6,7 @@ import ReactDom from "react-dom";
 import { Provider } from "react-redux";
 //Metodos redux para crear el store que almacenará los datos iniciale de los componentes
 import { createStore, applyMiddleware } from "redux";
+
 import reduxThunk from "redux-thunk";
 //Componente raíz de todos los demás que se creen
 import App from "./components/App";
