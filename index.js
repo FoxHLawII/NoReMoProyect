@@ -46,7 +46,6 @@ const express=require("express");
 const mongoose=require("mongoose");
 const cookieSession=require("cookie-session");
 const passport=require("passport");
-const authRoutes=require("./routes/auth");
 const keys=require("./config/keys");
 const Util=require("./utils/parsers");
 
@@ -66,6 +65,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 mongoose.connect(keys.mongoUri);
-authRoutes(app);
+
+require("./routes/auth")(app);
+require("./routes/survey")(app);
 
 app.listen(PORT)
