@@ -41,7 +41,7 @@ app.get(
 app.get("/auth/google/callback", passport.authenticate("google"));
 app.listen(PORT);
 */
-const PORT=process.env.PORT || 6000;
+const PORT=process.env.PORT || 9999;
 const express=require("express");
 const mongoose=require("mongoose");
 const cookieSession=require("cookie-session");
