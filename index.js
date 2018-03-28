@@ -50,7 +50,9 @@ const authRoutes=require("./routes/auth");
 const keys=require("./config/keys");
 const Util=require("./utils/parsers");
 
+//Cuando se agregan los modelos acá se crean en Mongo
 require("./models/user");
+require("./models/survey");
 require("./services/passport");
 
 const app=express();

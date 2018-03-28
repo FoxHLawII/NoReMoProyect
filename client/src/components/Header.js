@@ -1,15 +1,24 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
 class Header extends Component {
-  renderContent(){
-    switch(this.props.auth){
+  renderContent() {
+    switch (this.props.auth) {
       case null:
         return;
       case false:
-        return <li><a href="/auth/google">Accede con Google</a></li>
+        return (
+          <li>
+            <a href="/auth/google">Accede con Google</a>
+          </li>
+        );
       default:
-        return <li><a href="/auth/logout">Cerrar sesión</a></li>
+        return (
+          <li>
+            <a href="/auth/logout">Cerrar sesión</a>
+          </li>
+        );
     }
   }
   render() {
@@ -17,9 +26,12 @@ class Header extends Component {
     return (
       <nav>
         <div className="nav-wrapper">
-          <a href="#" className="brand-logo left">
+          <Link
+            to={this.props.auth ? "/surveys" : "/"}
+            className="brand-logo left"
+          >
             Emaily
-          </a>
+          </Link>
           <ul id="nav-mobile" className="right">
             {/* <li>
               <a href="/auth/google">Acceder con Google</a>
