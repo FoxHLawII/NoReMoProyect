@@ -5,19 +5,29 @@ const Mailer = require("../services/Mailer");
 const surveyTemplate = require("../services/emailTemplates/surveyTemplate");
 
 module.exports = app => {
-  app.post("/api/surveys", requireLogin, (req, res) => {
-    const { title, body, subject, recipients } = req.body;
+  app.get("/api/surveys/thanks",(req,res)=>{
+    res.send("Gracias por votar!");
+  });
+
+  app.post("/api/surveys", requireLogin, async (req, res) => {
+    const { title, subject, body, recipients } = req.body;
     const survey = new Survey({
       title: title,
-      body: body,
       subject: subject,
-      recipients: recipients.split(",").map(email => {
-        return { email: email.trim() };
-      }),
+      body: body,
+      recipients: recipients.split(",").map(email => ({ email: email.trim() })),
       _user: req.user.id,
       dateSent: Date.now()
     });
+    //Envío de Email
     const mailer = new Mailer(survey, surveyTemplate(survey));
-    mailer.send();
+    try {
+      await mailer.send();
+      await survey.save();
+      const user = await req.user.save();
+      res.send(user);
+    } catch (err) {
+      res.status(422).send(err);
+    }
   });
 };

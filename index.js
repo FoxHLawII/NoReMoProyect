@@ -46,6 +46,7 @@ const express=require("express");
 const mongoose=require("mongoose");
 const cookieSession=require("cookie-session");
 const passport=require("passport");
+const bodyParser=require("body-parser");
 const keys=require("./config/keys");
 const Util=require("./utils/parsers");
 
@@ -57,6 +58,7 @@ require("./services/passport");
 const app=express();
 
 //Intermediarios entre peticiones
+app.use(bodyParser.json());
 app.use(cookieSession({
   maxAge: Util.daysToMiliseconds(10),
   keys: [keys.cookieKey]
