@@ -63,7 +63,6 @@ app.use(cookieSession({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
-
 mongoose.connect(keys.mongoUri);
 
 require("./routes/auth")(app);

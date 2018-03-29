@@ -12,6 +12,8 @@ import reduxThunk from "redux-thunk";
 import App from "./components/App";
 
 import reducers from "./reducers";
+const axios=require("axios");
+window.axios=axios;
 //El store de redux necesita los reducers (combineReducers) donde se incluirán todos los reducers
 //Y el applyMiddleware es un intermediario en la peticon que recibe un reduxThunk 
 //Que interviene cuando se le devuelve una función desde una acción y le paa un dspatcher
