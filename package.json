@@ -12,7 +12,7 @@
     "server": "nodemon index.js",
     "client": "npm run start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\" \"npm run webhook\"",
-    "webhook": "lt -p 9999 -s unsubdominiorandom"
+    "webhook": "forever sendgrid_webhook.js"
   },
   "author": "",
   "license": "ISC",
@@ -26,14 +26,17 @@
     "nodemon": "^1.17.2",
     "passport": "^0.4.0",
     "passport-google-oauth20": "^1.0.0",
+    "path-parser": "^4.0.2",
     "save": "^2.3.2",
-    "sendgrid": "^5.2.3"
+    "sendgrid": "^5.2.3",
+    "url": "^0.11.0"
   },
   "devDependencies": {
     "eslint-config-standard": "^11.0.0",
     "eslint-plugin-import": "^2.9.0",
     "eslint-plugin-node": "^6.0.1",
     "eslint-plugin-promise": "^3.7.0",
-    "eslint-plugin-standard": "^3.0.1"
+    "eslint-plugin-standard": "^3.0.1",
+    "forever": "^0.15.3"
   }
 }
