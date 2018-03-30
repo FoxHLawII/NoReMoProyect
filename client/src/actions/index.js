@@ -21,3 +21,10 @@ export const fetchUser = () =>
     let response = await axios.get("/api/current_user");
     dispatcher({ type: FETCH_USER, payload: response.data });
   };
+
+export const submitSurvey = (values, history) => async dispatch => {
+  const res = await axios.post("/api/surveys", values);
+
+  history.push("/surveys");
+  dispatch({ type: FETCH_USER, payload: res.data });
+};

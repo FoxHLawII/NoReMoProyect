@@ -1,40 +1,37 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
-//Permite la cominicación fácil con redux-store
-import { reduxForm, Field } from "redux-form";
-import SurveyField from "./SurveyField";
-import _ from "lodash";
-
-const FIELDS = [
-  { id: "surveyNewTitle", title: "Título encuesta", name: "title" },
-  { id: "surveyNewSubject", title: "Asunto", name: "subject" },
-  { id: "surveyNewBody", title: "Cuerpo mensaje", name: "body" },
-  { id: "surveyNewRecipients", title: "Para", name: "recipients" }
-];
+import _ from 'lodash';
+import React, { Component } from 'react';
+import { reduxForm, Field } from 'redux-form';
+import { Link } from 'react-router-dom';
+import SurveyField from './SurveyField';
+import validateEmails from '../../utils/validateEmails';
+import formFields from './formFields';
 
 class SurveyForm extends Component {
   renderFields() {
-    return _.map(FIELDS, field => (
-      <Field
-        key={field.name}
-        id={field.id}
-        component={SurveyField}
-        type="text"
-        label={field.title}
-        name={field.name}
-      />
-    ));
+    return _.map(formFields, ({ label, name }) => {
+      return (
+        <Field
+          key={name}
+          component={SurveyField}
+          type="text"
+          label={label}
+          name={name}
+        />
+      );
+    });
   }
+
   render() {
     return (
       <div>
-        <form onSubmit={this.props.handleSubmit(values => console.log(values))}>
+        <form onSubmit={this.props.handleSubmit(this.props.onSurveySubmit)}>
           {this.renderFields()}
-          <Link className="red btn-flat white-text" to="/surveys">
+          <Link to="/surveys" className="red btn-flat white-text">
             Cancelar
           </Link>
-          <button className="teal btn-flat right white-text red" type="submit">
-            Submit <i className="material-icons right">done</i>
+          <button type="submit" className="teal btn-flat right white-text">
+            Continuar
+            <i className="material-icons right">done</i>
           </button>
         </form>
       </div>
@@ -42,6 +39,22 @@ class SurveyForm extends Component {
   }
 }
 
+function validate(values) {
+  const errors = {};
+
+  errors.recipients = validateEmails(values.recipients || '');
+
+  _.each(formFields, ({ name }) => {
+    if (!values[name]) {
+      errors[name] = 'El valor el requerido.';
+    }
+  });
+
+  return errors;
+}
+
 export default reduxForm({
-  form: "surveyForm"
+  validate,
+  form: 'surveyForm',
+  destroyOnUnmount: false
 })(SurveyForm);
