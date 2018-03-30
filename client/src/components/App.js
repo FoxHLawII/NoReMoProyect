@@ -6,7 +6,7 @@ import * as actions from "../actions";
 import Header from "./Header";
 import Landing from "./Landing";
 import Dashboard from "./Dashboard";
-import SurveyNew from "./surveys/SurveyNew"
+import SurveyNew from "./surveys/SurveyNew";
 
 //BrowserRauter y como un ViewRouter, solo puede tener un hijo,
 //y éste a su vez tendrá las rutas y los componentes que mostrará

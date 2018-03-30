@@ -5,7 +5,6 @@ class SurveyNew extends Component {
   render() {
     return (
       <div>
-        <p>SurveyNew</p>
         <SurveyForm />
       </div>
     );

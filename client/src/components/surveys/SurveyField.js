@@ -3,8 +3,8 @@ import React from "react";
 export default props => {
   return (
     <div>
-        <label>{props.label}</label>
-      <input id="in" {...props.input} />
+        <label htmlFor={props.id}>{props.label}</label>
+      <input id={props.id} {...props.input} />
     </div>
   );
 };
