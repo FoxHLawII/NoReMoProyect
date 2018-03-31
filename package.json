@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "engines": {
-    "node": "8.9.4",
+    "node": "8.11.1",
     "npm": "5.6.0"
   },
   "scripts": {
@@ -26,10 +26,8 @@
     "nodemon": "^1.17.2",
     "passport": "^0.4.0",
     "passport-google-oauth20": "^1.0.0",
-    "path-parser": "^4.0.2",
-    "save": "^2.3.2",
-    "sendgrid": "^5.2.3",
-    "url": "^0.11.0"
+    "path-parser": "^2.0.2",
+    "sendgrid": "^5.2.3"
   },
   "devDependencies": {
     "eslint-config-standard": "^11.0.0",
