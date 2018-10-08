@@ -2,9 +2,10 @@
 
 Para montarla en ambiente de desarrollo, es necesario
 
+ ```
 - Node -v >= 8.9.4
 - Npm -v >= 5.6.0
-
+```
 
 Clonar o descargar el repositorio
 
